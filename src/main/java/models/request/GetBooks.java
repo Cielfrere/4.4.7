@@ -1,4 +1,4 @@
-package Models.Requests;
+package models.request;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
@@ -6,5 +6,5 @@ import lombok.*;
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class GetBooks {
-    private String authors_id;
+    private String authorsId;
 }

@@ -1,16 +1,15 @@
-package Models.Responses;
+package models.responses;
 
-import Objects.Authors;
-import Objects.Books;
+import entity.Books;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import java.util.List;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GetBooksXML {
+public class BookListResponse {
     private List<Books> books;
-    private Authors author;
-    private  Error error;
-
+    private int errorCode;
+    private String errorMessage;
+    private String errorDetails;
 }

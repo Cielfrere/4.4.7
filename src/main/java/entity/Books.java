@@ -1,4 +1,4 @@
-package Objects;
+package entity;
 
 import lombok.*;
 
@@ -7,7 +7,7 @@ import lombok.*;
 @Data
 public class Books {
     private long id;
-    private String book_title;
-    private Authors author;
+    private String bookTittle;
+    private long authorId;
 
 }

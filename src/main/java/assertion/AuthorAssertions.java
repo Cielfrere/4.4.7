@@ -1,4 +1,4 @@
-package Assertion;
+package assertion;
 
 public class AuthorAssertions {
 }

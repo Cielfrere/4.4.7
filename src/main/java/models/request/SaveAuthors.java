@@ -1,4 +1,4 @@
-package Models.Requests;
+package models.request;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
@@ -6,7 +6,8 @@ import lombok.*;
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SaveAuthors {
-    private String first_name;
-    private String second_name;
-    private String family_name;
+    private long id;
+    private String firstName;
+    private String secondName;
+    private String familyName;
 }

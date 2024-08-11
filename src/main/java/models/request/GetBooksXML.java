@@ -1,6 +1,6 @@
-package Models.Requests;
+package models.request;
 
-import Objects.Authors;
+import entity.Authors;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
