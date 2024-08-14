@@ -8,4 +8,5 @@ import lombok.*;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class GetBooksXML {
     private Authors author;
+    private String bookTittle;
 }

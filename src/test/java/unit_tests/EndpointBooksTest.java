@@ -1,4 +1,4 @@
-package Unit_Tests;
+package unit_tests;
 
 public class EndpointBooksTest {
 }

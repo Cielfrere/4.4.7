@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class BookListResponse {
-    private List<Books> books;
+    private List<BookResponse> books;
     private int errorCode;
     private String errorMessage;
     private String errorDetails;
