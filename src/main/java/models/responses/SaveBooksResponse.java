@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SaveBooks {
+public class SaveBooksResponse {
     private long booksId;
     private int errorCode;
     private String errorMessage;
