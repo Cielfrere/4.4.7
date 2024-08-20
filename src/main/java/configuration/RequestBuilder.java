@@ -3,15 +3,19 @@ package configuration;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
 import models.request.GetBooks;
 import models.request.GetBooksXML;
 import models.request.SaveBooks;
 
 public class RequestBuilder {
-    private static final String URL = "http://localhost:8080/";
+    private static final String URL = "http://localhost:8080/library";
 
     private static RequestSpecBuilder baseSpecificationBuilder() {
         return new RequestSpecBuilder()
+                .addFilter(new RequestLoggingFilter())
+                .addFilter(new ResponseLoggingFilter())
                 .setContentType(ContentType.JSON)
                 .setBaseUri(URL);
     }
@@ -25,9 +29,10 @@ public class RequestBuilder {
 
     public static RequestSpecification getBookSpecification(GetBooks getBooks) {
         return baseSpecificationBuilder()
-                .setBasePath(String.format("authors/books/%d", getBooks.getAuthorsId()))
+                .setBasePath(String.format("authors/%s/books", getBooks.getAuthorsId()))
                 .build();
     }
+
     public static RequestSpecification getBookXmlSpecification(GetBooksXML getBooksXML) {
         return baseSpecificationBuilder()
                 .setBasePath("authors/books")

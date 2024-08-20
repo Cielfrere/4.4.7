@@ -15,9 +15,9 @@ import assertion.BooksAssertions;
 @Story("Сохранение книг автора")
 public class SaveMethodTest {
 
-    @ParameterizedTest
-    @CsvSource({"Преступление и наказание, 3", "Война и мир, 4", "Анна Каренина, 5"})
     @DisplayName("Cохранение книг")
+    @ParameterizedTest(name = "{index}")
+    @CsvSource({"Преступление и наказание, 3", "Война и мир, 4", "Анна Каренина, 5"})
     @Description("Проверка сохранения книг")
     public void saveBookTest(String bookTitle, int authorId) {
         Authors author = new Authors();
@@ -29,6 +29,6 @@ public class SaveMethodTest {
 
         SaveBooksResponse saveBooksResponse = configuration.ApiRequestLogic.saveBooks(saveBooks);
 
-        BooksAssertions.SaveBooksAssertion(saveBooksResponse);
+        BooksAssertions.saveBooksAssertion(saveBooksResponse);
     }
 }

@@ -17,6 +17,7 @@ public class ApiRequestLogic {
                 .post()
                 .as(SaveBooksResponse.class);
     }
+
     public static List<Books> getBooksJson(GetBooks getBooks) {
         return given().spec(RequestBuilder.getBookSpecification(getBooks))
                 .get()

@@ -19,23 +19,23 @@ import java.util.List;
 @Story("Получение книг автора")
 public class GetBooksAndAuthorTest {
 
-    @ParameterizedTest
     @DisplayName("Получение книг автора")
+    @ParameterizedTest(name = "{index}")
     @Description("Книги автора успешно получены")
-    @CsvSource({"01", "02"})
+    @CsvSource({"2"})
     public void testGetBooksByAuthor(String authorId) {
         GetBooks requestGetBooks = new GetBooks();
         requestGetBooks.setAuthorsId(authorId);
 
         List<Books> books = ApiRequestLogic.getBooksJson(requestGetBooks);
 
-        BooksAssertions.BookListAssertion(books);
+        BooksAssertions.bookListAssertion(books);
     }
 
-    @ParameterizedTest
     @DisplayName("Получение книг в формате XML")
+    @ParameterizedTest(name = "{index}")
     @Description("Получены книги в формате XML")
-    @CsvSource({"02"})
+    @CsvSource({"2"})
     public void testBooksByAuthorPostXML(int authorId) {
         GetBooksXML getBooksXML = new GetBooksXML();
         Authors author = new Authors();
@@ -44,6 +44,6 @@ public class GetBooksAndAuthorTest {
 
         List<Books> booksList = ApiRequestLogic.getBooksXml(getBooksXML);
 
-        BooksAssertions.BookListAssertion(booksList);
+        BooksAssertions.bookListAssertion(booksList);
     }
 }
