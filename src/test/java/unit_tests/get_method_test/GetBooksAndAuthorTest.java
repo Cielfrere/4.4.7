@@ -21,7 +21,7 @@ public class GetBooksAndAuthorTest {
     @DisplayName("Получение книг автора")
     @Test
     @Description("Книги автора успешно получены")
-    public void testGetBooksByAuthor() {
+    public void testGetBooks() {
         GetBooks requestGetBooks = new GetBooks();
         requestGetBooks.setAuthorsId("2");
 
@@ -33,7 +33,7 @@ public class GetBooksAndAuthorTest {
     @DisplayName("Получение книг в формате XML")
     @Test
     @Description("Получены книги в формате XML")
-    public void testBooksByAuthorPostXML() {
+    public void testGetBooksXML() {
         GetBooksXML getBooksXML = new GetBooksXML();
         Authors author = new Authors();
         author.setId(22);
