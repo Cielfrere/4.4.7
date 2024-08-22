@@ -14,10 +14,10 @@ public class RequestBuilder {
 
     private static RequestSpecBuilder baseSpecificationBuilder() {
         return new RequestSpecBuilder()
-                .addFilter(new RequestLoggingFilter())
-                .addFilter(new ResponseLoggingFilter())
+                .setBaseUri(URL)
                 .setContentType(ContentType.JSON)
-                .setBaseUri(URL);
+                .addFilter(new RequestLoggingFilter())
+                .addFilter(new ResponseLoggingFilter());
     }
 
     public static RequestSpecification saveBookSpecification(SaveBooks saveBooks) {

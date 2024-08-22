@@ -15,9 +15,8 @@ import assertion.BooksAssertions;
 @Story("Сохранение книг автора")
 public class SaveMethodTest {
 
-    @DisplayName("Cохранение книг")
-    @ParameterizedTest(name = "{index}")
-    @CsvSource({"Преступление и наказание, 3", "Война и мир, 4", "Анна Каренина, 5"})
+    @ParameterizedTest(name = "{index} => POST Запрос")
+    @CsvSource({"Преступление и наказание, 3, Фёдор, Михайлович, Достоевский", "Война и мир, 4, Лев, Николаевич, Толстой", "Анна Каренина, 5, Лев, Николаевич, Толстой"})
     @Description("Проверка сохранения книг")
     public void saveBookTest(String bookTitle, int authorId) {
         Authors author = new Authors();

@@ -8,8 +8,7 @@ import io.qameta.allure.Story;
 import models.request.GetBooks;
 import models.request.GetBooksXML;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.api.Test;
 import assertion.BooksAssertions;
 import configuration.ApiRequestLogic;
 
@@ -20,12 +19,11 @@ import java.util.List;
 public class GetBooksAndAuthorTest {
 
     @DisplayName("Получение книг автора")
-    @ParameterizedTest(name = "{index}")
+    @Test
     @Description("Книги автора успешно получены")
-    @CsvSource({"2"})
-    public void testGetBooksByAuthor(String authorId) {
+    public void testGetBooksByAuthor() {
         GetBooks requestGetBooks = new GetBooks();
-        requestGetBooks.setAuthorsId(authorId);
+        requestGetBooks.setAuthorsId("2");
 
         List<Books> books = ApiRequestLogic.getBooksJson(requestGetBooks);
 
@@ -33,13 +31,12 @@ public class GetBooksAndAuthorTest {
     }
 
     @DisplayName("Получение книг в формате XML")
-    @ParameterizedTest(name = "{index}")
+    @Test
     @Description("Получены книги в формате XML")
-    @CsvSource({"2"})
-    public void testBooksByAuthorPostXML(int authorId) {
+    public void testBooksByAuthorPostXML() {
         GetBooksXML getBooksXML = new GetBooksXML();
         Authors author = new Authors();
-        author.setId(authorId);
+        author.setId(22);
         getBooksXML.setAuthor(author);
 
         List<Books> booksList = ApiRequestLogic.getBooksXml(getBooksXML);
