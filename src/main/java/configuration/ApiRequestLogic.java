@@ -22,12 +22,12 @@ public class ApiRequestLogic {
         return given().spec(RequestBuilder.getBookSpecification(getBooks))
                 .get()
                 .then()
-                .extract().jsonPath().getList("Books", Books.class);
+                .extract().jsonPath().getList(".", Books.class);
     }
 
     public static List<Books> getBooksXml(GetBooksXML getBooksXML) {
         return given().spec(RequestBuilder.getBookXmlSpecification(getBooksXML))
-                .get()
+                .post()
                 .then()
                 .extract().xmlPath().getList(".", Books.class);
     }

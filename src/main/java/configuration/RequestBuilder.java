@@ -29,7 +29,7 @@ public class RequestBuilder {
 
     public static RequestSpecification getBookSpecification(GetBooks getBooks) {
         return baseSpecificationBuilder()
-                .setBasePath(String.format("authors/%s/books", getBooks.getAuthorsId()))
+                .setBasePath(String.format("authors/%s/books", getBooks.getAuthorId()))
                 .build();
     }
 

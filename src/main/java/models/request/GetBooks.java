@@ -9,5 +9,5 @@ import javax.xml.bind.annotation.XmlRootElement;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @XmlRootElement
 public class GetBooks {
-    private String authorsId;
+    private String authorId;
 }

@@ -1,8 +1,8 @@
 package models.responses;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import entity.Authors;
 import lombok.*;
-import models.request.SaveAuthors;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -11,5 +11,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class BookResponse {
     private String bookTittle;
-    private SaveAuthors authors;
+    private Authors author;
+    private int errorCode;
+    private String errorMessage;
+    private String errorDetails;
 }

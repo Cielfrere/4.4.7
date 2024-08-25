@@ -23,11 +23,11 @@ public class Authors {
     @JsonProperty("firstName")
     private String firstName;
 
-    @XmlElement(name = "secondName")
-    @JsonProperty("secondName")
-    private String secondName;
-
     @XmlElement(name = "familyName")
     @JsonProperty("familyName")
     private String familyName;
+
+    @XmlElement(name = "secondName")
+    @JsonProperty("secondName")
+    private String secondName;
 }

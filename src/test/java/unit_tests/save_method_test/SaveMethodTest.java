@@ -6,7 +6,6 @@ import entity.Authors;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Story;
 import models.responses.SaveBooksResponse;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import assertion.BooksAssertions;
@@ -15,7 +14,7 @@ import assertion.BooksAssertions;
 @Story("Сохранение книг автора")
 public class SaveMethodTest {
 
-    @ParameterizedTest(name = "{index} => POST Запрос")
+    @ParameterizedTest(name = "Сохранение новой книги с bookTitle = {0}")
     @CsvSource({"Преступление и наказание, 3, Фёдор, Михайлович, Достоевский", "Война и мир, 4, Лев, Николаевич, Толстой", "Анна Каренина, 5, Лев, Николаевич, Толстой"})
     @Description("Проверка сохранения книг")
     public void saveBookTest(String bookTitle, int authorId) {

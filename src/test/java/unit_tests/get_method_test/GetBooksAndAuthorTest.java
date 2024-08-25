@@ -23,11 +23,12 @@ public class GetBooksAndAuthorTest {
     @Description("Книги автора успешно получены")
     public void testGetBooks() {
         GetBooks requestGetBooks = new GetBooks();
-        requestGetBooks.setAuthorsId("2");
+        requestGetBooks.setAuthorId("2");
 
         List<Books> books = ApiRequestLogic.getBooksJson(requestGetBooks);
 
         BooksAssertions.bookListAssertion(books);
+        System.out.println(books);
     }
 
     @DisplayName("Получение книг в формате XML")
@@ -42,5 +43,6 @@ public class GetBooksAndAuthorTest {
         List<Books> booksList = ApiRequestLogic.getBooksXml(getBooksXML);
 
         BooksAssertions.bookListAssertion(booksList);
+        System.out.println(booksList);
     }
 }
