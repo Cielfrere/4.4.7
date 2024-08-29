@@ -5,6 +5,7 @@ import models.request.GetBooks;
 import models.request.GetBooksXML;
 import models.request.SaveBooks;
 import models.responses.SaveBooksResponse;
+import models.responses.XmlList;
 
 import java.util.List;
 
@@ -25,11 +26,11 @@ public class ApiRequestLogic {
                 .extract().jsonPath().getList(".", Books.class);
     }
 
-    public static List<Books> getBooksXml(GetBooksXML getBooksXML) {
+    public static XmlList getBooksXml(GetBooksXML getBooksXML) {
         return given().spec(RequestBuilder.getBookXmlSpecification(getBooksXML))
                 .post()
                 .then()
-                .extract().xmlPath().getList(".", Books.class);
+                .extract().as(XmlList.class);
     }
 }
 

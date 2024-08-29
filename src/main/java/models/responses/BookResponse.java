@@ -10,8 +10,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @XmlRootElement
 public class BookResponse {
-    private String bookTittle;
     private Authors author;
+
     private int errorCode;
     private String errorMessage;
     private String errorDetails;

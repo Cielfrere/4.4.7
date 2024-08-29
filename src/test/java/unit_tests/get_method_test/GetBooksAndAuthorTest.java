@@ -7,6 +7,7 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Story;
 import models.request.GetBooks;
 import models.request.GetBooksXML;
+import models.responses.XmlList;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import assertion.BooksAssertions;
@@ -40,7 +41,8 @@ public class GetBooksAndAuthorTest {
         author.setId(22);
         getBooksXML.setAuthor(author);
 
-        List<Books> booksList = ApiRequestLogic.getBooksXml(getBooksXML);
+        XmlList xmlList = ApiRequestLogic.getBooksXml(getBooksXML);
+        List<Books> booksList = xmlList.getBooks();
 
         BooksAssertions.bookListAssertion(booksList);
         System.out.println(booksList);

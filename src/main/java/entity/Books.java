@@ -17,9 +17,9 @@ public class Books {
     @JsonProperty("id")
     private long id;
 
-    @XmlElement(name = "bookTittle")
-    @JsonProperty("bookTittle")
-    private String bookTittle;
+    @XmlElement(name = "bookTitle")
+    @JsonProperty("bookTitle")
+    private String bookTitle;
 
     @XmlElement(name = "author")
     @JsonProperty("author")
