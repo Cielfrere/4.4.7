@@ -19,15 +19,15 @@ public class Authors {
     @JsonProperty("id")
     private long id;
 
-    @XmlElement(name = "firstName")
+    @XmlElement(name = "first_name")
     @JsonProperty("firstName")
     private String firstName;
 
-    @XmlElement(name = "familyName")
+    @XmlElement(name = "family_name")
     @JsonProperty("familyName")
     private String familyName;
 
-    @XmlElement(name = "secondName")
+    @XmlElement(name = "second_name")
     @JsonProperty("secondName")
     private String secondName;
 }

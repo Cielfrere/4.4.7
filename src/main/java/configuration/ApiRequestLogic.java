@@ -1,6 +1,7 @@
 package configuration;
 
 import entity.Books;
+import io.restassured.response.Response;
 import models.request.GetBooks;
 import models.request.GetBooksXML;
 import models.request.SaveBooks;
@@ -10,6 +11,7 @@ import models.responses.XmlList;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ApiRequestLogic {
 
@@ -31,6 +33,27 @@ public class ApiRequestLogic {
                 .post()
                 .then()
                 .extract().as(XmlList.class);
+    }
+
+    public static Response getBooksResponse(GetBooks requestGetBooks) {
+        return given()
+                .spec(RequestBuilder.getBookSpecification(requestGetBooks))
+                .get();
+    }
+
+    public static void listIsEmpty(List<Books> books) {
+        assertTrue(books.isEmpty());
+    }
+    public static Response getBooksResponseXml(GetBooksXML requestGetBooksXML) {
+        return given()
+                .spec(RequestBuilder.getBookXmlSpecification(requestGetBooksXML))
+                .post();
+    }
+
+    public static Response saveBookResponse(SaveBooks requestSaveBooks) {
+        return given()
+                .spec(RequestBuilder.saveBookSpecification(requestSaveBooks))
+                .post();
     }
 }
 

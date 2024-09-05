@@ -6,10 +6,11 @@ import lombok.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @XmlRootElement
 public class SaveAuthors {
-    private long id;
     private String firstName;
     private String secondName;
     private String familyName;

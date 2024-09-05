@@ -7,6 +7,7 @@ import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import models.request.GetBooks;
 import models.request.GetBooksXML;
+import models.request.SaveAuthors;
 import models.request.SaveBooks;
 
 public class RequestBuilder {
@@ -39,6 +40,12 @@ public class RequestBuilder {
                 .setContentType(ContentType.XML)
                 .setAccept(ContentType.XML)
                 .setBody(getBooksXML)
+                .build();
+    }
+    public static RequestSpecification requestSaveAuthorSpecification(SaveAuthors saveAuthors){
+        return baseSpecificationBuilder()
+                .setBasePath("authors/save")
+                .setBody(saveAuthors)
                 .build();
     }
 }
