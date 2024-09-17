@@ -7,12 +7,14 @@ import lombok.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @XmlAccessorType(XmlAccessType.NONE)
+@XmlRootElement(name = "author")
 public class Authors {
 
     @XmlElement(name = "id")

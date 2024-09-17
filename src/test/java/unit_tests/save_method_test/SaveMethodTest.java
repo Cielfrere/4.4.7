@@ -15,7 +15,9 @@ import org.junit.jupiter.params.provider.CsvSource;
 import assertion.BooksAssertions;
 import utils.DataHelper;
 
-import static assertion.StatusCodeAssertions.checkSaveStatusCode;
+import static assertion.ErrorMessageAssertions.errorMessageSaveAssertion;
+import static assertion.StatusCodeAssertions.checkStatusCode;
+import static utils.ErrorMessages.*;
 
 @Epic("Запрос на сохранение книг")
 @Story("Сохранение книг автора")
@@ -24,9 +26,8 @@ public class SaveMethodTest {
     @ParameterizedTest(name = "Сохранение новой книги с bookTitle = {0}")
     @CsvSource({"Преступление и наказание, 3, Фёдор, Михайлович, Достоевский", "Война и мир, 4, Лев, Николаевич, Толстой", "Анна Каренина, 5, Лев, Николаевич, Толстой"})
     @Description("Проверка сохранения книг")
-    public void saveBookTest(String bookTitle, int authorId) {
-        Authors author = new Authors();
-        author.setId(authorId);
+    public void saveBookTest(String bookTitle) {
+        Authors author = DataHelper.savedAuthor();
 
         SaveBooks saveBooks = new SaveBooks();
         saveBooks.setBookTitle(bookTitle);
@@ -46,7 +47,8 @@ public class SaveMethodTest {
         requestSaveBooks.setBookTitle(null);
         requestSaveBooks.setAuthor(authors);
         Response response = ApiRequestLogic.saveBookResponse(requestSaveBooks);
-        checkSaveStatusCode(response, 400);
+        checkStatusCode(response, 400);
+        errorMessageSaveAssertion(response, incorrect_booktitle);
     }
 
     @DisplayName("Сохранение книг без автора")
@@ -57,7 +59,8 @@ public class SaveMethodTest {
         requestSaveBooks.setBookTitle("Название");
         requestSaveBooks.setAuthor(null);
         Response response = ApiRequestLogic.saveBookResponse(requestSaveBooks);
-        checkSaveStatusCode(response, 400);
+        checkStatusCode(response, 400);
+        errorMessageSaveAssertion(response, incorrect_author);
     }
 
     @DisplayName("Сохранение книг без сохраненного автора")
@@ -70,15 +73,17 @@ public class SaveMethodTest {
         requestSaveBooks.setBookTitle("Название");
         requestSaveBooks.setAuthor(authors);
         Response response = ApiRequestLogic.saveBookResponse(requestSaveBooks);
-        checkSaveStatusCode(response, 409);
+        checkStatusCode(response, 409);
+        errorMessageSaveAssertion(response, unexpected_author);
     }
 
     @DisplayName("Сохранение книг без id автора")
     @Test
-    @Description("Сервис отправляет код ошибки 400")
+    @Description("Сервис отправляет код ошибки 409")
     public void saveBooksWithoutAuthorsId() {
         SaveBooks requestSaveBooks = DataHelper.withoutAuthorId();
         Response response = ApiRequestLogic.saveBookResponse(requestSaveBooks);
-        checkSaveStatusCode(response, 400);
+        checkStatusCode(response, 409);
+        errorMessageSaveAssertion(response, incorrect_author);
     }
 }

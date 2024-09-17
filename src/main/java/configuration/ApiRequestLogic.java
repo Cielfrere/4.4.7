@@ -44,6 +44,7 @@ public class ApiRequestLogic {
     public static void listIsEmpty(List<Books> books) {
         assertTrue(books.isEmpty());
     }
+
     public static Response getBooksResponseXml(GetBooksXML requestGetBooksXML) {
         return given()
                 .spec(RequestBuilder.getBookXmlSpecification(requestGetBooksXML))
@@ -54,6 +55,21 @@ public class ApiRequestLogic {
         return given()
                 .spec(RequestBuilder.saveBookSpecification(requestSaveBooks))
                 .post();
+    }
+
+    public static String errorMessage(Response response) {
+        return response
+                .then()
+                .extract()
+                .path("errorMessage");
+    }
+
+    public static String errorMessageXML(Response response) {
+        return response
+                .then()
+                .extract()
+                .xmlPath()
+                .getString("errorMessage");
     }
 }
 

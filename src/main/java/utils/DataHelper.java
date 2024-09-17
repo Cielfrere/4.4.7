@@ -3,6 +3,7 @@ package utils;
 import configuration.ApiRequestLogic;
 import configuration.RequestBuilder;
 import entity.Authors;
+import entity.Books;
 import models.request.SaveAuthors;
 import models.request.SaveBooks;
 
@@ -78,6 +79,22 @@ public class DataHelper {
         requestSaveBooks.setBookTitle("Название");
         requestSaveBooks.setAuthor(authors);
         return requestSaveBooks;
+    }
 
+    public static Books getBooks(Books actualBook) {
+        Books books = new Books();
+        books.setId(actualBook.getId());
+        books.setBookTitle(actualBook.getBookTitle());
+        books.setAuthor(actualBook.getAuthor());
+        return books;
+    }
+
+    public static Authors getAuthor(Authors currentAuthor) {
+        Authors existingAuthor = new Authors();
+        existingAuthor.setId(currentAuthor.getId());
+        existingAuthor.setFirstName(currentAuthor.getFirstName());
+        existingAuthor.setFamilyName(currentAuthor.getFamilyName());
+        existingAuthor.setSecondName(currentAuthor.getSecondName());
+        return existingAuthor;
     }
 }

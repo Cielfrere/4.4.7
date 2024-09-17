@@ -1,5 +1,6 @@
 package unit_tests.get_method_test;
 
+import assertion.AuthorAssertions;
 import entity.Authors;
 import entity.Books;
 import io.qameta.allure.Description;
@@ -18,8 +19,12 @@ import utils.DataHelper;
 
 import java.util.List;
 
+import static assertion.ErrorMessageAssertions.errorMessageAssertion;
+import static assertion.ErrorMessageAssertions.errorMessageXMLAssertion;
 import static assertion.StatusCodeAssertions.checkStatusCode;
 import static configuration.ApiRequestLogic.listIsEmpty;
+import static utils.ErrorMessages.incorrect_parameter;
+import static utils.ErrorMessages.unexpected_author;
 
 @Epic("Запрос на получение книг")
 @Story("Получение книг автора")
@@ -29,55 +34,58 @@ public class GetBooksAndAuthorTest {
     @Test
     @Description("Книги автора успешно получены")
     public void testGetBooks() {
+        Authors authors = DataHelper.savedAuthor();
+        Authors currentAuthor = DataHelper.getAuthor(authors);
         GetBooks requestGetBooks = new GetBooks();
-        requestGetBooks.setAuthorId("2");
+        requestGetBooks.setAuthorId(String.valueOf(authors.getId()));
 
         List<Books> books = ApiRequestLogic.getBooksJson(requestGetBooks);
 
         BooksAssertions.bookListAssertion(books);
-        System.out.println(books);
+        AuthorAssertions.matchAssertion(books,currentAuthor);
     }
 
     @DisplayName("Получение книг в формате XML")
     @Test
     @Description("Получены книги в формате XML")
     public void testGetBooksXML() {
+        Authors authors = DataHelper.savedAuthor();
+        Authors currentAuthor = DataHelper.getAuthor(authors);
         GetBooksXML getBooksXML = new GetBooksXML();
-        Authors author = new Authors();
-        author.setId(22);
-        getBooksXML.setAuthor(author);
+        getBooksXML.setAuthor(authors);
+        Response response = ApiRequestLogic.getBooksResponseXml(getBooksXML);
+        BookListResponse bookListResponse = response.as(BookListResponse.class);
 
-        XmlList xmlList = ApiRequestLogic.getBooksXml(getBooksXML);
-        List<Books> booksList = xmlList.getBooks();
-
-        BooksAssertions.bookListAssertion(booksList);
-        System.out.println(booksList);
+        BooksAssertions.bookListAssertion(bookListResponse.getBooks());
+        AuthorAssertions.matchAssertion(bookListResponse.getBooks(),currentAuthor);
     }
 
     @DisplayName("GET запрос к несохраненному автору в json")
     @Test
-    @Description("Сервис возвращает ошибку с кодом 400")
-    public void GetBookNotSavedAuthorJson() {
+    @Description("Сервис возвращает ошибку с кодом 409")
+    public void getBookNotSavedAuthorJson() {
         Authors author = DataHelper.notSavedAuthor();
         GetBooks requestGetBooks = new GetBooks();
         requestGetBooks.setAuthorId(String.valueOf(author.getId()));
         Response response = ApiRequestLogic.getBooksResponse(requestGetBooks);
-        checkStatusCode(response, 400);
+        checkStatusCode(response, 409);
+        errorMessageAssertion(response, unexpected_author);
     }
 
     @DisplayName("GET запрос без id автора в json")
     @Test
-    @Description("Сервис возвращает ошибку с кодом 400")
-    public void GetBookWithAuthorWithoutId() {
+    @Description("Сервис возвращает ошибку с кодом 409")
+    public void getBookWithAuthorWithoutId() {
         GetBooks requestGetBooks = new GetBooks();
         Response response = ApiRequestLogic.getBooksResponse(requestGetBooks);
-        checkStatusCode(response, 400);
+        checkStatusCode(response, 409);
+        errorMessageAssertion(response, incorrect_parameter);
     }
 
-    @DisplayName("GET запрос к автору без сохраненных книг в json")
+    @DisplayName("GET запрос к автору у которого отсутствуют сохраненные книги в формате json")
     @Test
     @Description("Сервис возвращает код 200 и пустой список")
-    public void GetBookWithAuthorWithoutJson() {
+    public void getBookWithAuthorWithoutJson() {
         Authors authors = DataHelper.withoutBookJson();
         GetBooks requestGetBooks = new GetBooks();
         requestGetBooks.setAuthorId(String.valueOf(authors.getId()));
@@ -89,30 +97,32 @@ public class GetBooksAndAuthorTest {
 
     @DisplayName("GET запрос к несохраненному автору в xml")
     @Test
-    @Description("Сервис возвращает ошибку с кодом 400")
-    public void GetBookNotSavedAuthorXml() {
+    @Description("Сервис возвращает ошибку с кодом 409")
+    public void getBookNotSavedAuthorXml() {
         Authors authors = DataHelper.notSavedAuthor();
         GetBooksXML requestGetBooksXML = new GetBooksXML();
         requestGetBooksXML.setAuthor(authors);
         Response response = ApiRequestLogic.getBooksResponseXml(requestGetBooksXML);
-        checkStatusCode(response, 400);
+        checkStatusCode(response, 409);
+        errorMessageXMLAssertion(response, unexpected_author);
     }
 
     @DisplayName("GET запрос без id автора в xml")
     @Test
-    @Description("Сервис возвращает ошибку с кодом 400")
-    public void GetBookWithAuthorWithoutIdXml() {
+    @Description("Сервис возвращает ошибку с кодом 409")
+    public void getBookWithAuthorWithoutIdXml() {
         GetBooksXML requestGetBooksXML = new GetBooksXML();
         Authors authors = new Authors();
         requestGetBooksXML.setAuthor(authors);
         Response response = ApiRequestLogic.getBooksResponseXml(requestGetBooksXML);
-        checkStatusCode(response, 400);
+        checkStatusCode(response, 409);
+        errorMessageXMLAssertion(response, incorrect_parameter);
     }
 
-    @DisplayName("GET запрос к автору без сохраненных книг в json")
+    @DisplayName("GET запрос к автору у которого отсутствуют сохраненные книги в XML")
     @Test
     @Description("Сервис возвращает код 200 и пустой список")
-    public void GetBookWithAuthorWithoutXML() {
+    public void getBookWithAuthorWithoutXML() {
         Authors authors = DataHelper.withoutBookXml();
         GetBooksXML requestGetBooksXML = new GetBooksXML();
         requestGetBooksXML.setAuthor(authors);
