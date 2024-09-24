@@ -15,9 +15,9 @@ public class DataHelper {
     public static Authors notSavedAuthor() {
         return new Authors(
                 -6,
-                "АВ",
-                "АК",
-                "АС");
+                "РђР’",
+                "РђРљ",
+                "РђРЎ");
     }
 
     public static Authors savedAuthor() {
@@ -36,7 +36,7 @@ public class DataHelper {
                 familyName
         );
         SaveBooks saveBooks = new SaveBooks();
-        saveBooks.setBookTitle("Позитивный сценарий");
+        saveBooks.setBookTitle("РџРѕР·РёС‚РёРІРЅС‹Р№ СЃС†РµРЅР°СЂРёР№");
         saveBooks.setAuthor(authors);
         ApiRequestLogic.saveBooks(saveBooks);
 
@@ -76,7 +76,7 @@ public class DataHelper {
         authors.setFamilyName(randomAlphabetic(5));
         authors.setSecondName(randomAlphabetic(5));
         SaveBooks requestSaveBooks = new SaveBooks();
-        requestSaveBooks.setBookTitle("Название");
+        requestSaveBooks.setBookTitle("РќР°Р·РІР°РЅРёРµ");
         requestSaveBooks.setAuthor(authors);
         return requestSaveBooks;
     }
