@@ -1,8 +1,8 @@
 package utils;
 
 public class ErrorMessages {
-    public static final String incorrect_parameter = "Неправильно введён один из обязательных параметров";
-    public static final String incorrect_booktitle = "Не указано название книги";
-    public static final String incorrect_author = "Не указан автор книги";
-    public static final String unexpected_author = "Указанный автор не существует";
+    public static final String incorrect_parameter = "РќРµРїСЂР°РІРёР»СЊРЅРѕ РІРІРµРґС‘РЅ РѕРґРёРЅ РёР· РѕР±СЏР·Р°С‚РµР»СЊРЅС‹С… РїР°СЂР°РјРµС‚СЂРѕРІ";
+    public static final String incorrect_booktitle = "РќРµ СѓРєР°Р·Р°РЅРѕ РЅР°Р·РІР°РЅРёРµ РєРЅРёРіРё";
+    public static final String incorrect_author = "РќРµ СѓРєР°Р·Р°РЅ Р°РІС‚РѕСЂ РєРЅРёРіРё";
+    public static final String unexpected_author = "РЈРєР°Р·Р°РЅРЅС‹Р№ Р°РІС‚РѕСЂ РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚";
 }
