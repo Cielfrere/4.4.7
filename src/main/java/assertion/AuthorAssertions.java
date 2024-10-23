@@ -9,20 +9,23 @@ import static org.junit.jupiter.api.Assertions.*;
 import static utils.DataHelper.getBooks;
 
 public class AuthorAssertions {
-    public static void matchAssertion(List<Books> booksToVerify, Authors existingAuthor, List<Books> expectedBooks) {
-        assertNotNull(booksToVerify);
-        assertFalse(booksToVerify.isEmpty());
-        assertEquals(expectedBooks.size(), booksToVerify.size());
-        for (Books bookToVerify : booksToVerify) {
-            Books expectedBook = getBooks(bookToVerify);
-            assertNotNull(bookToVerify);
-            assertNotNull(bookToVerify.getId());
-            assertNotNull(bookToVerify.getAuthor());
-            Authors authorId = bookToVerify.getAuthor();
-            assertEquals(existingAuthor.getId(), authorId.getId());
-            assertEquals(expectedBook.getId(), bookToVerify.getId());
-            assertEquals(expectedBook.getBookTitle(), bookToVerify.getBookTitle());
-            assertEquals(expectedBook.getId(), bookToVerify.getId());
+    public static void matchAssertion(List<Books> actualBooks, Authors expectedAuthor) {
+        assertNotNull(actualBooks);
+        assertFalse(actualBooks.isEmpty());
+
+        for (Books actualBook : actualBooks) {
+            assertNotNull(actualBook);
+            assertNotNull(actualBook.getId());
+            assertNotNull(actualBook.getAuthor());
+            Authors actualAuthor = actualBook.getAuthor();
+            assertEquals(expectedAuthor.getId(), actualAuthor.getId());
+            Books expectedBook = getBooks(actualBook);
+            assertNotNull(expectedBook);
+            assertTrue(actualBooks.equals(expectedBook));
+            assertEquals(expectedBook.getId(), actualBook.getId());
+            assertEquals(expectedBook.getBookTitle(), actualBook.getBookTitle());
+            // Я сравниваю то что записано в DataHelper для тестовых данных с тем что содержится по идее в бд
+            // В actualBook записываются тестовые данные, а actualBooks остается неизменяемым
         }
     }
 }
